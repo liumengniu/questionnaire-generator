@@ -51,7 +51,7 @@ function App() {
 	 * 拖拽 - 放置事件
 	 */
 	const handleDrop = () => {
-		addComponent()
+		dragCompId && addComponent()
 	}
 	/**
 	 * 允许拖拽元素放置在该区域
@@ -102,7 +102,7 @@ function App() {
 	const handleItemDragEnter = idx =>{
 		setTargetItemIdx(idx)
 	}
-	const handleItemDrop = () =>{
+	const handleItemDrop = () => {
 		if (dragItemComIdx === targetItemIdx) return
 		data.splice(dragItemComIdx, 1, ...data.splice(targetItemIdx, 1, data[dragItemComIdx]))
 	}
@@ -121,7 +121,6 @@ function App() {
 	 * @param childIdx
 	 */
 	const handleChildItemCompBlur = (e, idx, childIdx) => {
-		console.log(e, idx, childIdx, '88888888888888888888')
 		const textContent = e?.target?.textContent;
 		let childOptions = _.get(data, `${idx}.options`);
 		_.set(childOptions, `${childIdx}.label`, textContent)
