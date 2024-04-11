@@ -92,13 +92,24 @@ function App() {
 	const handleItemDragStart = (e, idx, item) => {
 		setDragItemComIdx(idx)
 	}
+	/**
+	 * 停止挪动展示组件为止
+	 */
 	const handleItemDragEnd = () => {
 		setDragItemComIdx(null)
 	}
+	/**
+	 * 展示组件进入其他展示组件区域
+	 * @param idx
+	 */
 	const handleItemDragEnter = idx => {
 		setTargetItemIdx(idx)
 	}
+	/**
+	 * 展示组件互相移动位置
+	 */
 	const handleItemDrop = () => {
+		if (dragCompId) return
 		if (dragItemComIdx === targetItemIdx) return
 		data.splice(dragItemComIdx, 1, ...data.splice(targetItemIdx, 1, data[dragItemComIdx]))
 	}
