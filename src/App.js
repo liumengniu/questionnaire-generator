@@ -9,8 +9,6 @@ import {
 	HeartTwoTone,
 	GroupOutlined,
 	StarOutlined,
-	PlusOutlined,
-	MinusOutlined,
 } from '@ant-design/icons';
 import {Cascader, DatePicker, Input, InputNumber, Modal, Rate, TimePicker, Upload} from "antd";
 
@@ -28,6 +26,9 @@ function App() {
 	const [questionnaireSubTitle, setQuestionnaireSubTitle] = useState("感谢您抽出几分钟时间填写以下内容，现在我们开始吧")
 	// 拖拽组件id
 	const [dragCompId, setDragCompId] = useState(null)
+	// 展示组件索引
+	const [dragItemComIdx, setDragItemComIdx] = useState(null)
+	const [targetItemIdx, setTargetItemIdx ] = useState(null)
 	
 	/**
 	 * 元拖拽事件
@@ -81,6 +82,26 @@ function App() {
 	const handleQuestionnaireSubTitle = (e, idx) =>{
 		const textContent = e?.target?.textContent;
 		setQuestionnaireSubTitle(textContent)
+	}
+	
+	/**
+	 * 拖拽展示组件
+	 * @param e
+	 * @param idx
+	 * @param item
+	 */
+	const handleItemDragStart = (e, idx, item) => {
+		setDragItemComIdx(idx)
+	}
+	const handleItemDragEnd = () => {
+		setDragItemComIdx(null)
+	}
+	const handleItemDragEnter = idx =>{
+		setTargetItemIdx(idx)
+	}
+	const handleItemDrop = () =>{
+		if (dragItemComIdx === targetItemIdx) return
+		data.splice(dragItemComIdx, 1, ...data.splice(targetItemIdx, 1, data[dragItemComIdx]))
 	}
 	
 	/**
@@ -231,7 +252,9 @@ function App() {
 							{
 								data?.map((item, idx) => {
 									return (
-										<div className="auto-form-questionnaire-wrapper-item" draggable="true" key={idx}>
+										<div key={idx} className="auto-form-questionnaire-wrapper-item" draggable={true}
+										     onDragStart={e => handleItemDragStart(e, idx, item)} onDragEnd={handleItemDragEnd}
+										     onDragEnter={() => handleItemDragEnter(idx)} onDrop={handleItemDrop}>
 											{
 												item?.type === 'radio' ? (
 													<div className="item-content">
