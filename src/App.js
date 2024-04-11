@@ -4,19 +4,12 @@ import optionType from "@/configs/optionType.js"
 import {useState} from "react";
 import _ from "lodash"
 import {
-	DeleteOutlined,
-	InboxOutlined,
 	HeartTwoTone,
 	GroupOutlined,
 	StarOutlined,
 } from '@ant-design/icons';
-import {Cascader, DatePicker, Input, InputNumber, Modal, Rate, TimePicker, Upload} from "antd";
+import {Modal} from "antd";
 
-const {TextArea} = Input;
-const {Dragger} = Upload;
-
-import ItemOperate from "@comp/ItemOperate";
-import ItemTopic from "@comp/ItemTopic";
 import BasicComponent from "@comp/modules/BasicModule";
 import RadioModule from "@comp/modules/RadioModule";
 import UserModule from "@comp/modules/UserModule";

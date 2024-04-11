@@ -3,6 +3,7 @@ import {DeleteOutlined} from "@ant-design/icons";
 import ItemOperate from "@comp/ItemOperate";
 
 /**
+ * 单选、多选展示组件
  * @author Kevin
  * @Date: 2024-4-11
  */

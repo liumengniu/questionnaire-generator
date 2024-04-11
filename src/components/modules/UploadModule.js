@@ -6,6 +6,7 @@ import ItemOperate from "@comp/ItemOperate";
 const {Dragger} = Upload;
 
 /**
+ * 上传组件
  * @author Kevin
  * @Date: 2024-4-11
  */
