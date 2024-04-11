@@ -276,37 +276,6 @@ function App() {
 													             item={item}
 													             multiple={true}
 													/>
-												) : item?.type === 'input' ? (
-													<div className="item-content">
-														<ItemTopic handleTitle={e => handleTitle(e, idx)} idx={idx} text={item?.text}/>
-														<Input placeholder="请输入内容"/>
-														<ItemOperate addChildItem={e => addChildItem(e, idx)} removeItem={e => removeItem(e, idx)} type={item?.type}/>
-													</div>
-												) : item?.type === 'inputNumber' ? (
-													<div className="item-content">
-														<ItemTopic handleTitle={e => handleTitle(e, idx)} idx={idx} text={item?.text}/>
-														<InputNumber min={1} max={10} defaultValue={3} style={{width: "100%"}}/>
-													</div>
-												) : item?.type === 'textarea' ? (
-													<div className="item-content">
-														<ItemTopic handleTitle={e => handleTitle(e, idx)} idx={idx} text={item?.text}/>
-														<TextArea showCount maxLength={100} placeholder="请输入内容"/>
-													</div>
-												) : item?.type === 'datepicker' ? (
-													<div className="item-content">
-														<ItemTopic handleTitle={e => handleTitle(e, idx)} idx={idx} text={item?.text}/>
-														<DatePicker/>
-													</div>
-												) : item?.type === 'timepicker' ? (
-													<div className="item-content">
-														<ItemTopic handleTitle={e => handleTitle(e, idx)} idx={idx} text={item?.text}/>
-														<TimePicker/>
-													</div>
-												) : item?.type === 'rate' ? (
-													<div className="item-content">
-														<ItemTopic handleTitle={e => handleTitle(e, idx)} idx={idx} text={item?.text}/>
-														<Rate/>
-													</div>
 												) : item?.type === 'upload' ? (
 													<div className="item-content">
 														<ItemTopic handleTitle={e => handleTitle(e, idx)} idx={idx} text={item?.text}/>
