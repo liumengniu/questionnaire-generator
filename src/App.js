@@ -113,7 +113,6 @@ function App() {
 	const handleChildItemDelete = (e, idx, childIdx) => {
 		let childOptions = _.get(data, `${idx}.options`);
 		childOptions = _.filter(childOptions, (o, index) => index !== childIdx);
-		console.log(childOptions, '---------------------------------')
 		_.set(data, `${idx}.options`, childOptions);
 		setData([...data])
 	}
