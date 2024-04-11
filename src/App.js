@@ -19,6 +19,7 @@ import ItemOperate from "@comp/ItemOperate";
 import ItemTopic from "@comp/ItemTopic";
 import BasicComponent from "@comp/modules/BasicModule";
 import RadioModule from "@comp/modules/RadioModule";
+import UserModule from "@comp/modules/UserModule";
 
 function App() {
 	// 问卷题目集合
@@ -31,7 +32,7 @@ function App() {
 	const [dragCompId, setDragCompId] = useState(null)
 	// 展示组件索引
 	const [dragItemComIdx, setDragItemComIdx] = useState(null)
-	const [targetItemIdx, setTargetItemIdx ] = useState(null)
+	const [targetItemIdx, setTargetItemIdx] = useState(null)
 	
 	/**
 	 * 元拖拽事件
@@ -73,7 +74,7 @@ function App() {
 	 * @param e
 	 * @param idx
 	 */
-	const handleQuestionnaireTitle = (e, idx) =>{
+	const handleQuestionnaireTitle = (e, idx) => {
 		const textContent = e?.target?.textContent;
 		setQuestionnaireTitle(textContent)
 	}
@@ -82,7 +83,7 @@ function App() {
 	 * @param e
 	 * @param idx
 	 */
-	const handleQuestionnaireSubTitle = (e, idx) =>{
+	const handleQuestionnaireSubTitle = (e, idx) => {
 		const textContent = e?.target?.textContent;
 		setQuestionnaireSubTitle(textContent)
 	}
@@ -99,7 +100,7 @@ function App() {
 	const handleItemDragEnd = () => {
 		setDragItemComIdx(null)
 	}
-	const handleItemDragEnter = idx =>{
+	const handleItemDragEnter = idx => {
 		setTargetItemIdx(idx)
 	}
 	const handleItemDrop = () => {
@@ -110,7 +111,7 @@ function App() {
 	/**
 	 * 编辑单个组件标题
 	 */
-	const handleTitle = (e, idx) =>{
+	const handleTitle = (e, idx) => {
 		const textContent = e?.target?.textContent;
 		_.set(data, `${idx}.text`, textContent);
 	}
@@ -246,7 +247,9 @@ function App() {
 						<img className="auto-form-questionnaire-img"
 						     src="https://aliyuncdn.antdv.com/form/usercontent/account/63eb343c554e0004/default-header-size-w=1276-h=379.jpeg"/>
 						<div className="auto-form-questionnaire-header">
-							<div className="questionnaire-title" suppressContentEditableWarning contentEditable={true} onBlur={handleQuestionnaireTitle}>问卷题目</div>
+							<div className="questionnaire-title" suppressContentEditableWarning contentEditable={true}
+							     onBlur={handleQuestionnaireTitle}>问卷题目
+							</div>
 							<div className="questionnaire-description" suppressContentEditableWarning
 							     contentEditable={true} onBlur={handleQuestionnaireSubTitle}>感谢您抽出几分钟填写以下内容，现在我们开始吧
 							</div>
@@ -296,52 +299,30 @@ function App() {
 															填写签名
 														</div>
 													</div>
-												) : item?.type === 'name' ? (
-													<div className="item-content">
-														<ItemTopic handleTitle={e => handleTitle(e, idx)} idx={idx} text={item?.text}/>
-														<Input placeholder="请输入姓名"/>
-													</div>
-												) : item?.type === 'gender' ? (
-													<div className="item-content">
-														<ItemTopic handleTitle={e => handleTitle(e, idx)} idx={idx} text={item?.text}/>
-														<div className="gender-group">
-															<div>男</div>
-															<div>女</div>
-														</div>
-													</div>
-												) : item?.type === 'phone' ? (
-													<div className="item-content">
-														<ItemTopic handleTitle={e => handleTitle(e, idx)} idx={idx} text={item?.text}/>
-														<Input placeholder="请输入11位手机号" disabled={true}/>
-													</div>
-												) : item?.type === 'address' ? (
-													<div className="item-content">
-														<ItemTopic handleTitle={e => handleTitle(e, idx)} idx={idx} text={item?.text}/>
-														<div className="item-address-group">
-															<Cascader defaultValue={['湖南省', '长沙市', '岳麓区']} disabled={true}
-															          style={{width: "100%", marginBottom: 10}}/>
-															<Input placeholder="请输入详细地址"/>
-														</div>
-													</div>
-												) : item?.type === 'income' ? (
-													<RadioModule handleTitle={e => handleTitle(e, idx)} idx={idx} text={item?.text}
-													             handleChildItemCompBlur={handleChildItemCompBlur}
-													             handleChildItemDelete={e => handleChildItemDelete(e, idx)}
-													             addChildItem={e => addChildItem(e, idx)}
-													             removeItem={e => removeItem(e, idx)} type={item?.type}
-													             item={item}
-													/>
-												) : item?.type === 'clothes_size' ? (
-													<RadioModule handleTitle={e => handleTitle(e, idx)} idx={idx} text={item?.text}
-													             handleChildItemCompBlur={handleChildItemCompBlur}
-													             handleChildItemDelete={e => handleChildItemDelete(e, idx)}
-													             addChildItem={e => addChildItem(e, idx)}
-													             removeItem={e => removeItem(e, idx)} type={item?.type}
-													             item={item}
-													/>
-												) : <BasicComponent handleTitle={e => handleTitle(e, idx)} idx={idx} text={item?.text}
-												                    addChildItem={e => addChildItem(e, idx)}
-												                    removeItem={e => removeItem(e, idx)} type={item?.type}/>
+												) : _.includes(["name", "gender", "phone", "address"], item?.type) ?
+													<UserModule handleTitle={e => handleTitle(e, idx)} idx={idx} text={item?.text}
+													            addChildItem={e => addChildItem(e, idx)}
+													            removeItem={e => removeItem(e, idx)}
+													            type={item?.type}/>
+													: item?.type === 'income' ? (
+														<RadioModule handleTitle={e => handleTitle(e, idx)} idx={idx} text={item?.text}
+														             handleChildItemCompBlur={handleChildItemCompBlur}
+														             handleChildItemDelete={e => handleChildItemDelete(e, idx)}
+														             addChildItem={e => addChildItem(e, idx)}
+														             removeItem={e => removeItem(e, idx)} type={item?.type}
+														             item={item}
+														/>
+													) : item?.type === 'clothes_size' ? (
+														<RadioModule handleTitle={e => handleTitle(e, idx)} idx={idx} text={item?.text}
+														             handleChildItemCompBlur={handleChildItemCompBlur}
+														             handleChildItemDelete={e => handleChildItemDelete(e, idx)}
+														             addChildItem={e => addChildItem(e, idx)}
+														             removeItem={e => removeItem(e, idx)} type={item?.type}
+														             item={item}
+														/>
+													) : <BasicComponent handleTitle={e => handleTitle(e, idx)} idx={idx} text={item?.text}
+													                    addChildItem={e => addChildItem(e, idx)}
+													                    removeItem={e => removeItem(e, idx)} type={item?.type}/>
 											}
 										</div>
 									)
