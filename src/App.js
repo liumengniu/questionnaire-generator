@@ -20,6 +20,8 @@ import ItemTopic from "@comp/ItemTopic";
 import BasicComponent from "@comp/modules/BasicModule";
 import RadioModule from "@comp/modules/RadioModule";
 import UserModule from "@comp/modules/UserModule";
+import UploadModule from "@comp/modules/UploadModule";
+import SignatureModule from "@comp/modules/SignatureModule";
 
 function App() {
 	// 问卷题目集合
@@ -262,7 +264,7 @@ function App() {
 										     onDragStart={e => handleItemDragStart(e, idx, item)} onDragEnd={handleItemDragEnd}
 										     onDragEnter={() => handleItemDragEnter(idx)} onDrop={handleItemDrop}>
 											{
-												item?.type === 'radio' ? (
+												_.includes(["radio", "checkbox", "income", "clothes_size"], item?.type) ?
 													<RadioModule handleTitle={e => handleTitle(e, idx)} idx={idx} text={item?.text}
 													             handleChildItemCompBlur={handleChildItemCompBlur}
 													             handleChildItemDelete={e => handleChildItemDelete(e, idx)}
@@ -270,59 +272,22 @@ function App() {
 													             removeItem={e => removeItem(e, idx)} type={item?.type}
 													             item={item}
 													/>
-												) : item?.type === 'checkbox' ? (
-													<RadioModule handleTitle={e => handleTitle(e, idx)} idx={idx} text={item?.text}
-													             handleChildItemCompBlur={handleChildItemCompBlur}
-													             handleChildItemDelete={e => handleChildItemDelete(e, idx)}
-													             addChildItem={e => addChildItem(e, idx)}
-													             removeItem={e => removeItem(e, idx)} type={item?.type}
-													             item={item}
-													             multiple={true}
-													/>
-												) : item?.type === 'upload' ? (
-													<div className="item-content">
-														<ItemTopic handleTitle={e => handleTitle(e, idx)} idx={idx} text={item?.text}/>
-														<Dragger disabled={true}>
-															<p className="ant-upload-drag-icon">
-																<InboxOutlined/>
-															</p>
-															<p className="ant-upload-text">点击或拖拽文件至此区域即可上传</p>
-															<p className="ant-upload-hint">
-																支持单次或批量上传. 禁止上传公司数据或其他重要文件
-															</p>
-														</Dragger>
-													</div>
-												) : item?.type === 'electronicSignature' ? (
-													<div className="item-content">
-														<ItemTopic handleTitle={e => handleTitle(e, idx)} idx={idx} text={item?.text}/>
-														<div className="item-electronic-signature-group">
-															填写签名
-														</div>
-													</div>
-												) : _.includes(["name", "gender", "phone", "address"], item?.type) ?
-													<UserModule handleTitle={e => handleTitle(e, idx)} idx={idx} text={item?.text}
-													            addChildItem={e => addChildItem(e, idx)}
-													            removeItem={e => removeItem(e, idx)}
-													            type={item?.type}/>
-													: item?.type === 'income' ? (
-														<RadioModule handleTitle={e => handleTitle(e, idx)} idx={idx} text={item?.text}
-														             handleChildItemCompBlur={handleChildItemCompBlur}
-														             handleChildItemDelete={e => handleChildItemDelete(e, idx)}
-														             addChildItem={e => addChildItem(e, idx)}
-														             removeItem={e => removeItem(e, idx)} type={item?.type}
-														             item={item}
-														/>
-													) : item?.type === 'clothes_size' ? (
-														<RadioModule handleTitle={e => handleTitle(e, idx)} idx={idx} text={item?.text}
-														             handleChildItemCompBlur={handleChildItemCompBlur}
-														             handleChildItemDelete={e => handleChildItemDelete(e, idx)}
-														             addChildItem={e => addChildItem(e, idx)}
-														             removeItem={e => removeItem(e, idx)} type={item?.type}
-														             item={item}
-														/>
-													) : <BasicComponent handleTitle={e => handleTitle(e, idx)} idx={idx} text={item?.text}
-													                    addChildItem={e => addChildItem(e, idx)}
-													                    removeItem={e => removeItem(e, idx)} type={item?.type}/>
+													: item?.type === 'upload' ?
+													<UploadModule handleTitle={e => handleTitle(e, idx)} idx={idx} text={item?.text}
+													              addChildItem={e => addChildItem(e, idx)}
+													              removeItem={e => removeItem(e, idx)} type={item?.type}/>
+													: item?.type === 'electronicSignature' ?
+														<SignatureModule handleTitle={e => handleTitle(e, idx)} idx={idx} text={item?.text}
+														                 addChildItem={e => addChildItem(e, idx)}
+														                 removeItem={e => removeItem(e, idx)} type={item?.type}/>
+														: _.includes(["name", "gender", "phone", "address"], item?.type) ?
+															<UserModule handleTitle={e => handleTitle(e, idx)} idx={idx} text={item?.text}
+															            addChildItem={e => addChildItem(e, idx)}
+															            removeItem={e => removeItem(e, idx)}
+															            type={item?.type}/>
+															: <BasicComponent handleTitle={e => handleTitle(e, idx)} idx={idx} text={item?.text}
+															                  addChildItem={e => addChildItem(e, idx)}
+															                  removeItem={e => removeItem(e, idx)} type={item?.type}/>
 											}
 										</div>
 									)
