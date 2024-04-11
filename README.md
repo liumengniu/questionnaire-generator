@@ -48,7 +48,7 @@
 ## 🌟 Star History
 <br>
 
-[![Star History Chart](https://api.star-history.com/svg?repos=liumengniu/questionnaire-generator&Date)](https://star-history.com/#liumengniu/questionnaire-generator&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=liumengniu/questionnaire-generator&type=Timeline)](https://star-history.com/#liumengniu/questionnaire-generator&Timeline)
 
 
 
