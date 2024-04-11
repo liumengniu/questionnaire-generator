@@ -17,6 +17,8 @@ const {Dragger} = Upload;
 
 import ItemOperate from "@comp/ItemOperate";
 import ItemTopic from "@comp/ItemTopic";
+import BasicComponent from "@comp/modules/BasicModule";
+import RadioModule from "@comp/modules/RadioModule";
 
 function App() {
 	// 问卷题目集合
@@ -119,6 +121,7 @@ function App() {
 	 * @param childIdx
 	 */
 	const handleChildItemCompBlur = (e, idx, childIdx) => {
+		console.log(e, idx, childIdx, '88888888888888888888')
 		const textContent = e?.target?.textContent;
 		let childOptions = _.get(data, `${idx}.options`);
 		_.set(childOptions, `${childIdx}.label`, textContent)
@@ -258,57 +261,22 @@ function App() {
 										     onDragEnter={() => handleItemDragEnter(idx)} onDrop={handleItemDrop}>
 											{
 												item?.type === 'radio' ? (
-													<div className="item-content">
-														<ItemTopic handleTitle={e => handleTitle(e, idx)} idx={idx} text={item?.text}/>
-														<div className="item-radio-group">
-															{
-																item?.options?.map((childItem, childIdx) => {
-																	return (
-																		<div
-																			className={`${item?.activeIdx === childIdx ? 'active' : ''} item-radio-group-item`}
-																			key={childIdx}>
-																			<div/>
-																			<div className="item-radio-group-item-content">
-																				<div suppressContentEditableWarning contentEditable={true}
-																				     className="radio-item" placeholder="请输入"
-																				     onBlur={e => handleChildItemCompBlur(e, idx, childIdx)}>{childItem?.label}</div>
-																				<DeleteOutlined twoToneColor="red" className="icon-del"
-																				                onClick={e => handleChildItemDelete(e, idx, childIdx)}/>
-																			</div>
-																		</div>
-																	)
-																})
-															}
-														</div>
-														
-														<ItemOperate addChildItem={e => addChildItem(e, idx)} removeItem={e => removeItem(e, idx)} type={item?.type}/>
-													</div>
+													<RadioModule handleTitle={e => handleTitle(e, idx)} idx={idx} text={item?.text}
+													             handleChildItemCompBlur={handleChildItemCompBlur}
+													             handleChildItemDelete={e => handleChildItemDelete(e, idx)}
+													             addChildItem={e => addChildItem(e, idx)}
+													             removeItem={e => removeItem(e, idx)} type={item?.type}
+													             item={item}
+													/>
 												) : item?.type === 'checkbox' ? (
-													<div className="item-content">
-														<ItemTopic handleTitle={e => handleTitle(e, idx)} idx={idx} text={item?.text}/>
-														<div className="item-radio-group">
-															{
-																item?.options?.map((childItem, childIdx) => {
-																	return (
-																		<div
-																			className={`${item?.activeIdx === childIdx ? 'active' : ''} item-radio-group-item item-checkbox`}
-																			key={childIdx}>
-																			<div/>
-																			<div className="item-radio-group-item-content">
-																				<div suppressContentEditableWarning contentEditable={true}
-																				     className="radio-item" placeholder="请输入"
-																				     onBlur={e => handleChildItemCompBlur(e, idx, childIdx)}>{childItem?.label}</div>
-																				<DeleteOutlined twoToneColor="red" className="icon-del"
-																				                onClick={e => handleChildItemDelete(e, idx, childIdx)}/>
-																			</div>
-																		</div>
-																	)
-																})
-															}
-														</div>
-														
-														<ItemOperate addChildItem={e => addChildItem(e, idx)} removeItem={e => removeItem(e, idx)} type={item?.type}/>
-													</div>
+													<RadioModule handleTitle={e => handleTitle(e, idx)} idx={idx} text={item?.text}
+													             handleChildItemCompBlur={handleChildItemCompBlur}
+													             handleChildItemDelete={e => handleChildItemDelete(e, idx)}
+													             addChildItem={e => addChildItem(e, idx)}
+													             removeItem={e => removeItem(e, idx)} type={item?.type}
+													             item={item}
+													             multiple={true}
+													/>
 												) : item?.type === 'input' ? (
 													<div className="item-content">
 														<ItemTopic handleTitle={e => handleTitle(e, idx)} idx={idx} text={item?.text}/>
@@ -388,56 +356,24 @@ function App() {
 														</div>
 													</div>
 												) : item?.type === 'income' ? (
-													<div className="item-content">
-														<ItemTopic handleTitle={e => handleTitle(e, idx)} idx={idx} text={item?.text}/>
-														<div className="item-radio-group">
-															{
-																item?.options?.map((childItem, childIdx) => {
-																	return (
-																		<div
-																			className={`${item?.activeIdx === childIdx ? 'active' : ''} item-radio-group-item`}
-																			key={childIdx}>
-																			<div/>
-																			<div className="item-radio-group-item-content">
-																				<div suppressContentEditableWarning contentEditable={true}
-																				     className="radio-item" placeholder="请输入"
-																				     onBlur={e => handleChildItemCompBlur(e, idx, childIdx)}>{childItem?.label}</div>
-																				<DeleteOutlined twoToneColor="red" className="icon-del"
-																				                onClick={e => handleChildItemDelete(e, idx, childIdx)}/>
-																			</div>
-																		</div>
-																	)
-																})
-															}
-														</div>
-														<ItemOperate addChildItem={e => addChildItem(e, idx)} removeItem={e => removeItem(e, idx)} type={item?.type}/>
-													</div>
+													<RadioModule handleTitle={e => handleTitle(e, idx)} idx={idx} text={item?.text}
+													             handleChildItemCompBlur={handleChildItemCompBlur}
+													             handleChildItemDelete={e => handleChildItemDelete(e, idx)}
+													             addChildItem={e => addChildItem(e, idx)}
+													             removeItem={e => removeItem(e, idx)} type={item?.type}
+													             item={item}
+													/>
 												) : item?.type === 'clothes_size' ? (
-													<div className="item-content">
-														<ItemTopic handleTitle={e => handleTitle(e, idx)} idx={idx} text={item?.text}/>
-														<div className="item-radio-group">
-															{
-																item?.options?.map((childItem, childIdx) => {
-																	return (
-																		<div
-																			className={`${item?.activeIdx === childIdx ? 'active' : ''} item-radio-group-item`}
-																			key={childIdx}>
-																			<div/>
-																			<div className="item-radio-group-item-content">
-																				<div suppressContentEditableWarning contentEditable={true}
-																				     className="radio-item" placeholder="请输入"
-																				     onBlur={e => handleChildItemCompBlur(e, idx, childIdx)}>{childItem?.label}</div>
-																				<DeleteOutlined twoToneColor="red" className="icon-del"
-																				                onClick={e => handleChildItemDelete(e, idx, childIdx)}/>
-																			</div>
-																		</div>
-																	)
-																})
-															}
-														</div>
-														<ItemOperate addChildItem={e => addChildItem(e, idx)} removeItem={e => removeItem(e, idx)} type={item?.type}/>
-													</div>
-												) : null
+													<RadioModule handleTitle={e => handleTitle(e, idx)} idx={idx} text={item?.text}
+													             handleChildItemCompBlur={handleChildItemCompBlur}
+													             handleChildItemDelete={e => handleChildItemDelete(e, idx)}
+													             addChildItem={e => addChildItem(e, idx)}
+													             removeItem={e => removeItem(e, idx)} type={item?.type}
+													             item={item}
+													/>
+												) : <BasicComponent handleTitle={e => handleTitle(e, idx)} idx={idx} text={item?.text}
+												                    addChildItem={e => addChildItem(e, idx)}
+												                    removeItem={e => removeItem(e, idx)} type={item?.type}/>
 											}
 										</div>
 									)
