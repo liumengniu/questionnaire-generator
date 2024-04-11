@@ -16,6 +16,7 @@ const {TextArea} = Input;
 const {Dragger} = Upload;
 
 import ItemOperate from "@comp/ItemOperate";
+import ItemTopic from "@comp/ItemTopic";
 
 function App() {
 	// 问卷题目集合
@@ -258,9 +259,7 @@ function App() {
 											{
 												item?.type === 'radio' ? (
 													<div className="item-content">
-														<div className="item-topic" suppressContentEditableWarning
-														     contentEditable={true} onBlur={e => handleTitle(e, idx)}>{`${idx + 1}、${item?.text}`}
-														</div>
+														<ItemTopic handleTitle={e => handleTitle(e, idx)} idx={idx} text={item?.text}/>
 														<div className="item-radio-group">
 															{
 																item?.options?.map((childItem, childIdx) => {
@@ -286,9 +285,7 @@ function App() {
 													</div>
 												) : item?.type === 'checkbox' ? (
 													<div className="item-content">
-														<div className="item-topic" suppressContentEditableWarning
-														     contentEditable={true}>{`${idx + 1}、${item?.text}`}
-														</div>
+														<ItemTopic handleTitle={e => handleTitle(e, idx)} idx={idx} text={item?.text}/>
 														<div className="item-radio-group">
 															{
 																item?.options?.map((childItem, childIdx) => {
@@ -314,52 +311,38 @@ function App() {
 													</div>
 												) : item?.type === 'input' ? (
 													<div className="item-content">
-														<div className="item-topic" suppressContentEditableWarning
-														     contentEditable={true}>{`${idx + 1}、${item?.text}`}
-														</div>
+														<ItemTopic handleTitle={e => handleTitle(e, idx)} idx={idx} text={item?.text}/>
 														<Input placeholder="请输入内容"/>
 														<ItemOperate addChildItem={e => addChildItem(e, idx)} removeItem={e => removeItem(e, idx)} type={item?.type}/>
 													</div>
 												) : item?.type === 'inputNumber' ? (
 													<div className="item-content">
-														<div className="item-topic" suppressContentEditableWarning
-														     contentEditable={true}>{`${idx + 1}、${item?.text}`}
-														</div>
+														<ItemTopic handleTitle={e => handleTitle(e, idx)} idx={idx} text={item?.text}/>
 														<InputNumber min={1} max={10} defaultValue={3} style={{width: "100%"}}/>
 													</div>
 												) : item?.type === 'textarea' ? (
 													<div className="item-content">
-														<div className="item-topic" suppressContentEditableWarning
-														     contentEditable={true}>{`${idx + 1}、${item?.text}`}
-														</div>
+														<ItemTopic handleTitle={e => handleTitle(e, idx)} idx={idx} text={item?.text}/>
 														<TextArea showCount maxLength={100} placeholder="请输入内容"/>
 													</div>
 												) : item?.type === 'datepicker' ? (
 													<div className="item-content">
-														<div className="item-topic" suppressContentEditableWarning
-														     contentEditable={true}>{`${idx + 1}、${item?.text}`}
-														</div>
+														<ItemTopic handleTitle={e => handleTitle(e, idx)} idx={idx} text={item?.text}/>
 														<DatePicker/>
 													</div>
 												) : item?.type === 'timepicker' ? (
 													<div className="item-content">
-														<div className="item-topic" suppressContentEditableWarning
-														     contentEditable={true}>{`${idx + 1}、${item?.text}`}
-														</div>
+														<ItemTopic handleTitle={e => handleTitle(e, idx)} idx={idx} text={item?.text}/>
 														<TimePicker/>
 													</div>
 												) : item?.type === 'rate' ? (
 													<div className="item-content">
-														<div className="item-topic" suppressContentEditableWarning
-														     contentEditable={true}>{`${idx + 1}、${item?.text}`}
-														</div>
+														<ItemTopic handleTitle={e => handleTitle(e, idx)} idx={idx} text={item?.text}/>
 														<Rate/>
 													</div>
 												) : item?.type === 'upload' ? (
 													<div className="item-content">
-														<div className="item-topic" suppressContentEditableWarning
-														     contentEditable={true}>{`${idx + 1}、${item?.text}`}
-														</div>
+														<ItemTopic handleTitle={e => handleTitle(e, idx)} idx={idx} text={item?.text}/>
 														<Dragger disabled={true}>
 															<p className="ant-upload-drag-icon">
 																<InboxOutlined/>
@@ -372,25 +355,19 @@ function App() {
 													</div>
 												) : item?.type === 'electronicSignature' ? (
 													<div className="item-content">
-														<div className="item-topic" suppressContentEditableWarning
-														     contentEditable={true}>{`${idx + 1}、${item?.text}`}
-														</div>
+														<ItemTopic handleTitle={e => handleTitle(e, idx)} idx={idx} text={item?.text}/>
 														<div className="item-electronic-signature-group">
 															填写签名
 														</div>
 													</div>
 												) : item?.type === 'name' ? (
 													<div className="item-content">
-														<div className="item-topic" suppressContentEditableWarning
-														     contentEditable={true}>{`${idx + 1}、${item?.text}`}
-														</div>
+														<ItemTopic handleTitle={e => handleTitle(e, idx)} idx={idx} text={item?.text}/>
 														<Input placeholder="请输入姓名"/>
 													</div>
 												) : item?.type === 'gender' ? (
 													<div className="item-content">
-														<div className="item-topic" suppressContentEditableWarning
-														     contentEditable={true}>{`${idx + 1}、${item?.text}`}
-														</div>
+														<ItemTopic handleTitle={e => handleTitle(e, idx)} idx={idx} text={item?.text}/>
 														<div className="gender-group">
 															<div>男</div>
 															<div>女</div>
@@ -398,16 +375,12 @@ function App() {
 													</div>
 												) : item?.type === 'phone' ? (
 													<div className="item-content">
-														<div className="item-topic" suppressContentEditableWarning
-														     contentEditable={true}>{`${idx + 1}、${item?.text}`}
-														</div>
+														<ItemTopic handleTitle={e => handleTitle(e, idx)} idx={idx} text={item?.text}/>
 														<Input placeholder="请输入11位手机号" disabled={true}/>
 													</div>
 												) : item?.type === 'address' ? (
 													<div className="item-content">
-														<div className="item-topic" suppressContentEditableWarning
-														     contentEditable={true}>{`${idx + 1}、${item?.text}`}
-														</div>
+														<ItemTopic handleTitle={e => handleTitle(e, idx)} idx={idx} text={item?.text}/>
 														<div className="item-address-group">
 															<Cascader defaultValue={['湖南省', '长沙市', '岳麓区']} disabled={true}
 															          style={{width: "100%", marginBottom: 10}}/>
@@ -416,9 +389,7 @@ function App() {
 													</div>
 												) : item?.type === 'income' ? (
 													<div className="item-content">
-														<div className="item-topic" suppressContentEditableWarning
-														     contentEditable={true} onBlur={e => handleTitle(e, idx)}>{`${idx + 1}、${item?.text}`}
-														</div>
+														<ItemTopic handleTitle={e => handleTitle(e, idx)} idx={idx} text={item?.text}/>
 														<div className="item-radio-group">
 															{
 																item?.options?.map((childItem, childIdx) => {
@@ -443,9 +414,7 @@ function App() {
 													</div>
 												) : item?.type === 'clothes_size' ? (
 													<div className="item-content">
-														<div className="item-topic" suppressContentEditableWarning
-														     contentEditable={true} onBlur={e => handleTitle(e, idx)}>{`${idx + 1}、${item?.text}`}
-														</div>
+														<ItemTopic handleTitle={e => handleTitle(e, idx)} idx={idx} text={item?.text}/>
 														<div className="item-radio-group">
 															{
 																item?.options?.map((childItem, childIdx) => {
